@@ -2,8 +2,8 @@ import sys
 import random
 
 sys.path.append("../queue_and_stack")
-# from dll_queue import Queue
-# from dll_stack import Stack
+from dll_queue import Queue
+from dll_stack import Stack
 
 
 class BinarySearchTree:
@@ -14,9 +14,7 @@ class BinarySearchTree:
 
     # Insert the given value into the tree
     def insert(self, value):
-        if self.value is None:
-            self.value = value
-        elif value < self.value:
+        if value < self.value:
             if self.left is None:
                 self.left = BinarySearchTree(value)
             else:
@@ -30,16 +28,14 @@ class BinarySearchTree:
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        if self.value is None:
-            return False
         if self.value == target:
             return True
-        if target < self.value:
+        elif target < self.value:
             if self.left is not None:
                 return self.left.contains(target)
             else:
                 return False
-        elif target >= self.value:
+        else:
             if self.right is not None:
                 return self.right.contains(target)
             else:
@@ -47,8 +43,6 @@ class BinarySearchTree:
 
     # Return the maximum value found in the tree
     def get_max(self):
-        if self.value is None:
-            return None
         if self.right is None:
             return self.value
         return self.right.get_max()
@@ -73,12 +67,44 @@ class BinarySearchTree:
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        bft = Queue()
+        bft.enqueue(node)
+        while bft.size > 0:
+            node = bft.dequeue()
+            print(node.value)
+            if node.left is not None:
+                bft.enqueue(node.left)
+            if node.right is not None:
+                bft.enqueue(node.right)
+
+    # Iterative BFT
+    # create queue
+    # add root to queue
+    # while queue is not empty
+    # node = pop head of queue
+    # DO THE THING!!! (print)
+    # add children of node to queue
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        dft = Stack()
+        dft.push(node)
+        while dft.size > 0:
+            node = dft.pop()
+            print(node.value)
+            if node.left is not None:
+                dft.push(node.left)
+            if node.right is not None:
+                dft.push(node.right)
+
+    # Iterative DFT
+    # create stack
+    # add root to stack
+    # while stack is not empty
+    # node = pop top of stack
+    # DO THE THING!!! (print)
+    # add children of node to stack
 
     # STRETCH Goals -------------------------
     # Note: Research may be required
@@ -90,3 +116,16 @@ class BinarySearchTree:
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
         pass
+
+
+bst = BinarySearchTree(1)
+bst.insert(8)
+bst.insert(5)
+bst.insert(7)
+bst.insert(6)
+bst.insert(3)
+bst.insert(4)
+bst.insert(2)
+
+bst.bft_print(bst)
+# bst.dft_print(bst)
