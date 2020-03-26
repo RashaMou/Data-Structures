@@ -35,12 +35,12 @@ class BinarySearchTree:
             return True
         if target < self.value:
             if self.left is not None:
-                self.left.contains(target)
+                return self.left.contains(target)
             else:
                 return False
         elif target >= self.value:
             if self.right is not None:
-                self.right.contains(target)
+                return self.right.contains(target)
             else:
                 return False
 
