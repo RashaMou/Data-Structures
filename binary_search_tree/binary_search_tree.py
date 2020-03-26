@@ -90,30 +90,3 @@ class BinarySearchTree:
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
         pass
-
-
-bst = BinarySearchTree(5)
-arr = []
-
-
-def cb(x):
-    arr = []
-    arr.append(x)
-    return arr
-
-
-v1 = random.randint(1, 101)
-v2 = random.randint(1, 101)
-v3 = random.randint(1, 101)
-v4 = random.randint(1, 101)
-v5 = random.randint(1, 101)
-
-bst.insert(v1)
-bst.insert(v2)
-bst.insert(v3)
-bst.insert(v4)
-bst.insert(v5)
-
-bst.for_each(cb)
-
-print(arr)
