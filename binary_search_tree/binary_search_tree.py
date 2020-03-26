@@ -15,37 +15,34 @@ class BinarySearchTree:
     def insert(self, value):
         if self.value is None:
             self.value = value
-            return
         elif value < self.value:
             if self.left is None:
                 self.left = BinarySearchTree(value)
-                return
             else:
-                # next_left_node = BinarySearchTree(self.left)
                 self.left.insert(value)
         elif value >= self.value:
             if self.right is None:
                 self.right = BinarySearchTree(value)
-                return
             else:
-                # next_right_node = BinarySearchTree(self.right)
                 self.right.insert(value)
 
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        pass
-
-    #  find:
-    # if node is none
-    #    return false
-    # if node.value == findvalue
-    #     return true
-    # else
-    #     if find <  node.value
-    #            find on  left node
-    #     else
-    #            find on right node
+        if self.value is None:
+            return False
+        if self.value == target:
+            return True
+        if target < self.value:
+            if self.left is not None:
+                self.left.contains(target)
+            else:
+                return False
+        elif target >= self.value:
+            if self.right is not None:
+                self.right.contains(target)
+            else:
+                return False
 
     # Return the maximum value found in the tree
     def get_max(self):
@@ -95,5 +92,5 @@ bst = BinarySearchTree(5)
 bst.insert(2)
 bst.insert(3)
 bst.insert(7)
-bst.insert(6)
-print(bst.left.right)
+print(bst.contains(7))
+print(bst.contains(8))
