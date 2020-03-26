@@ -1,4 +1,5 @@
 import sys
+import random
 
 sys.path.append("../queue_and_stack")
 # from dll_queue import Queue
@@ -46,31 +47,21 @@ class BinarySearchTree:
 
     # Return the maximum value found in the tree
     def get_max(self):
+        if self.value is None:
+            return None
         if self.right is None:
             return self.value
-        else:
-            return self.right.get_max()
-
-    # if there;s a right:
-    # get max on right
-    # else
-    # return node value
-
-    # if not self.head:
-    #         return None
-    #     max_value = self.head.value
-    #     current = self.head
-    #     while current:
-    #         if current.value > max_value:
-    #             max_value = current.value
-    #         current = current.next
-    #     return max_value
+        return self.right.get_max()
 
     # Call the function `cb` on the value of each node
     # You may use a recursive or iterative approach
     def for_each(self, cb):
         # performs a traversal of _every_ node in the tree, executing the passed-in callback function on each tree node value. There is a myriad of ways to perform tree traversal; in this case any of them should work.
-        pass
+        cb(self.value)
+        if self.left:
+            self.left.for_each(cb)
+        if self.right:
+            self.right.for_each(cb)
 
     # DAY 2 Project -----------------------
 
@@ -102,12 +93,27 @@ class BinarySearchTree:
 
 
 bst = BinarySearchTree(5)
-print(bst.get_max())
-bst.insert(30)
-print(bst.get_max())
+arr = []
 
-# bst.insert(2)
-# bst.insert(3)
-# bst.insert(7)
-# print(bst.contains(7))
-# print(bst.contains(8))
+
+def cb(x):
+    arr = []
+    arr.append(x)
+    return arr
+
+
+v1 = random.randint(1, 101)
+v2 = random.randint(1, 101)
+v3 = random.randint(1, 101)
+v4 = random.randint(1, 101)
+v5 = random.randint(1, 101)
+
+bst.insert(v1)
+bst.insert(v2)
+bst.insert(v3)
+bst.insert(v4)
+bst.insert(v5)
+
+bst.for_each(cb)
+
+print(arr)
